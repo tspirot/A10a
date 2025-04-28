@@ -105,5 +105,55 @@ namespace A10a
             comboBoxGrad.SelectedIndex = -1;
             textBoxTelefon.Text = "";
         }
+
+        private void toolStripButtonIzmena_Click(object sender, EventArgs e)
+        {
+            if(textBoxSifra.Text == "")
+            {
+                MessageBox.Show("Nema selektovanog pecaroša!");
+                return;
+            }
+            if(textBoxIme.Text == "" || textBoxPrezime.Text == "" 
+                || textBoxAdresa.Text == "" || 
+                comboBoxGrad.SelectedIndex == -1 || 
+                textBoxTelefon.Text == "")
+            {
+                MessageBox.Show("Nisu popunjena sva polja!");
+                return;
+            }
+            string upit = "UPDATE Pecaros " +
+                "SET Ime=@ime, Prezime=@prezime, Adresa=@adresa, GradID=@grad, Telefon=@telefon " +
+                "WHERE PecarosID=@pecarosID";
+            SqlCommand komanda = new SqlCommand(upit, konekcija);
+            komanda.Parameters.AddWithValue("@ime", textBoxIme.Text);
+            komanda.Parameters.AddWithValue("@prezime", textBoxPrezime.Text);
+            komanda.Parameters.AddWithValue("@adresa", textBoxAdresa.Text);
+            komanda.Parameters.AddWithValue("@grad", comboBoxGrad.SelectedValue);
+            komanda.Parameters.AddWithValue("@telefon", textBoxTelefon.Text);
+            komanda.Parameters.AddWithValue("@pecarosID", textBoxSifra.Text);
+            try
+            {
+                konekcija.Open();
+                komanda.ExecuteNonQuery();
+                MessageBox.Show("Uspešno izmenjen pecaroš!");
+                int sel = listBox1.SelectedIndex;   
+                OsveziListuPecarosa();
+                listBox1.SelectedIndex = sel;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Greška " + ex.Message);
+            }
+            finally
+            {
+                konekcija.Close();
+            }
+        }
+
+        private void toolStripButtonAnaliza_Click(object sender, EventArgs e)
+        {
+            FormUlov frm = new FormUlov();
+            frm.ShowDialog();
+        }
     }
 }

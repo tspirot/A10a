@@ -77,6 +77,7 @@
             this.toolStripButtonIzmena.Size = new System.Drawing.Size(61, 74);
             this.toolStripButtonIzmena.Text = "Izmena";
             this.toolStripButtonIzmena.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButtonIzmena.Click += new System.EventHandler(this.toolStripButtonIzmena_Click);
             // 
             // toolStripButtonAnaliza
             // 
@@ -86,6 +87,7 @@
             this.toolStripButtonAnaliza.Size = new System.Drawing.Size(62, 74);
             this.toolStripButtonAnaliza.Text = "Analiza";
             this.toolStripButtonAnaliza.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButtonAnaliza.Click += new System.EventHandler(this.toolStripButtonAnaliza_Click);
             // 
             // toolStripButtonOAplikaciji
             // 
